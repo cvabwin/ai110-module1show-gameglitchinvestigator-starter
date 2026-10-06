@@ -2,17 +2,17 @@ from logic_utils import check_guess
 
 def test_winning_guess():
     # If the secret is 50 and guess is 50, it should be a win
-    result = check_guess(50, 50)
+    result, _ = check_guess(50, 50)
     assert result == "Win"
 
 def test_guess_too_high():
     # If secret is 50 and guess is 60, hint should be "Too High"
-    result = check_guess(60, 50)
+    result, _ = check_guess(60, 50)
     assert result == "Too High"
 
 def test_guess_too_low():
     # If secret is 50 and guess is 40, hint should be "Too Low"
-    result = check_guess(40, 50)
+    result, _ = check_guess(40, 50)
     assert result == "Too Low"
 
 def test_too_high_hint_says_go_lower():
@@ -34,3 +34,13 @@ def test_compares_numerically_not_as_text():
     assert outcome == "Too Low"
     outcome, _ = check_guess(100, 50)
     assert outcome == "Too High"
+
+def test_temperature_scales_with_range():
+    from logic_utils import get_temperature
+    assert get_temperature(50, 50, 1, 100) == ("Correct", "🎯")
+    assert get_temperature(55, 50, 1, 100)[0] == "Hot"
+    assert get_temperature(70, 50, 1, 100)[0] == "Warm"
+    assert get_temperature(95, 50, 1, 100)[0] == "Cold"
+    # 3 away is "Hot" on 1-100 but only "Warm" on Easy's 1-20
+    assert get_temperature(53, 50, 1, 100)[0] == "Hot"
+    assert get_temperature(13, 10, 1, 20)[0] == "Warm"

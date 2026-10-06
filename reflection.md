@@ -42,20 +42,26 @@ I check the code and played the game a couple of times.
 
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
-  
-- Did AI help you design or understand any tests? How?
+Using pytest, 3 passed and 3 failed. Additional glitches need to be addressed.  
 
+- Did AI help you design or understand any tests? How?
+Yes. 3 passed, 3 failed. Claude help me to see that the three that fail are the original starter tests, and they fail because they compare the result to just "Win", but check_guess returns two values. Changing them to check result[0] would fix them.
 ---
 
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
-
+Streamlit reruns your whole script every time the user interacts with the page, so normal variables reset each time. st.session_state is a dictionary that persists across those reruns, which is where you keep anything the app needs to remember, like the secret number or the score.
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+Double-checking, not relying on AI test or code without verification.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+Keep tasks small so that bugs are easier to isolate.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+AI generated code is not necessarily perfect or appropriate for the project's requirement and scope. It's best to be project manager as well as co-developer when working with AI code assistance.
